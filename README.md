@@ -1,2 +1,2 @@
 # library
-Changing original app to use classes
+Change original app to use classes
