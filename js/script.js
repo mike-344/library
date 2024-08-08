@@ -67,14 +67,34 @@ const addBookButton = document.querySelector(".add-book")
 
 addBookButton.addEventListener("click", (event) => {
     event.preventDefault();
-    const newBook = new Book(title.value, author.value, pages.value, read.value);
-    title.value = "";
-    author.value = "";
-    pages.value = "";
-    read.value = "";
-    addBookToLibrary(myLibrary, newBook);
-    
-    newBookForm.style.visibility = "hidden";
-    displayBookRevised(myLibrary);
+   // checkInput();
+    if (checkInput()){
+        const newBook = new Book(title.value, author.value, pages.value, read.value);
+        title.value = "";
+        author.value = "";
+        pages.value = "";
+        read.value = "";
+        addBookToLibrary(myLibrary, newBook);
+        
+        newBookForm.style.visibility = "hidden";
+        displayBookRevised(myLibrary);
+    }
     
 })
+
+function checkInput(){
+    const allInputs = document.querySelectorAll("input");
+    const allFilled = Array.from(allInputs).every(input => !input.validity.valueMissing);
+
+    if (allFilled) {
+        errorMessage.textContent = ""; 
+        return true;
+    } else {
+        errorMessage.textContent = "Fill out all fields"; 
+        return false;
+    }
+
+}
+
+const errorMessage = document.querySelector(".error")
+
